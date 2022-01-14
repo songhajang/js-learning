@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계산기위ㅣ</title>
+    <style>
+        body{
+            background-color: #e9eef2;
+        }
+        .main_box{
+            width: 650px;
+            height: 700px;
+            background-color: #bedbf1;
+            border-radius: 40px;
+            margin: 0 auto;
+            margin-top: 100px;
+
+            box-sizing: border-box;
+            padding: 50px;
+        }
+        #input-box{
+            background-color: #343c3f;
+            border: none;
+            width: 100%;
+            height: 100px;
+            border-radius: 50px;
+
+            text-align: center;
+            color: white;
+            font-size: 45px;
+        }
+        table{
+            width: 100%;
+            height: 400px;
+            margin-top: 30px;
+        }
+        table td input{
+            width: 100px;
+            height: 100px;
+
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: #f6fbff;
+            font-size:30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main_box">
+        <input type="" value="" id="input-box" >
+        <table>
+            <tr>
+                <td><input type="button" value="C" id="inpC"></td>
+                <td><input type="button" value="/" id="inp/"></td>
+                <td><input type="button" value="*" id="inp*"></td>
+                <td><input type="button" value="-" id="inp-"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="1" class="button-number"></td>
+                <td><input type="button" value="2" class="button-number"></td>
+                <td><input type="button" value="3" class="button-number"></td>
+                <td><input type="button" value="+" id="inp+"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="4" class="button-number"></td>
+                <td><input type="button" value="5" class="button-number"></td>
+                <td><input type="button" value="6" class="button-number"></td>
+                <td rowspan="2"><input type="button" value="=" id="inp=" style="height: 100%; border-radius: 50px;"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="7"  class="button-number"></td>
+                <td><input type="button" value="8"  class="button-number"></td>
+                <td><input type="button" value="9"  class="button-number"></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        const box = document.querySelector('#input-box')
+        let number = document.querySelectorAll('.button-number')
+        
+        for(eachNum of number) {
+            eachNum.addEventListener("click", typeData(eachNum))
+        }
+        
+        //closure
+        function typeData(eachNum) {
+            return () => {
+                console.log(eachNum.value)
+            }
+            //데이터 디스플레이에 삽입해야 하는 함수
+        }
+        //함수의 return값이 funciton => closure || return 값이 value => function
+    </script>
+</body>
+</html>
