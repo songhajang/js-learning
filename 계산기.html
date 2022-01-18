@@ -49,48 +49,61 @@
 </head>
 <body>
     <div class="main_box">
-        <input type="" value="" id="input-box" >
+        <input type="" value="" id="input-box" autocomplete="off">
         <table>
             <tr>
-                <td><input type="button" value="C" id="inpC"></td>
-                <td><input type="button" value="/" id="inp/"></td>
-                <td><input type="button" value="*" id="inp*"></td>
-                <td><input type="button" value="-" id="inp-"></td>
+                <td><input type="button" value="C" class="button" id="inpC"></td>
+                <td><input type="button" value="/" class="button" id="inp/"></td>
+                <td><input type="button" value="*" class="button" id="inp*"></td>
+                <td><input type="button" value="-" class="button" id="inp-"></td>
             </tr>
             <tr>
-                <td><input type="button" value="1" class="button-number"></td>
-                <td><input type="button" value="2" class="button-number"></td>
-                <td><input type="button" value="3" class="button-number"></td>
-                <td><input type="button" value="+" id="inp+"></td>
+                <td><input type="button" value="1" class="button"></td>
+                <td><input type="button" value="2" class="button"></td>
+                <td><input type="button" value="3" class="button"></td>
+                <td><input type="button" value="+" class="button" id="inp+"></td>
             </tr>
             <tr>
-                <td><input type="button" value="4" class="button-number"></td>
-                <td><input type="button" value="5" class="button-number"></td>
-                <td><input type="button" value="6" class="button-number"></td>
-                <td rowspan="2"><input type="button" value="=" id="inp=" style="height: 100%; border-radius: 50px;"></td>
+                <td><input type="button" value="4" class="button"></td>
+                <td><input type="button" value="5" class="button"></td>
+                <td><input type="button" value="6" class="button"></td>
+                <td rowspan="2"><input type="button" value="=" id="calculationBtn" style="height: 100%; border-radius: 50px;"></td>
             </tr>
             <tr>
-                <td><input type="button" value="7"  class="button-number"></td>
-                <td><input type="button" value="8"  class="button-number"></td>
-                <td><input type="button" value="9"  class="button-number"></td>
+                <td><input type="button" value="7"  class="button"></td>
+                <td><input type="button" value="8"  class="button"></td>
+                <td><input type="button" value="9"  class="button"></td>
             </tr>
         </table>
     </div>
 
     <script>
-        const box = document.querySelector('#input-box')
-        let number = document.querySelectorAll('.button-number')
-        
-        for(eachNum of number) {
-            eachNum.addEventListener("click", typeData(eachNum))
+        const displayBox = document.getElementById('input-box')
+        const calculationBtns = document.getElementById('calculationBtn')
+        const buttons = document.querySelectorAll('.button')
+
+        for(button of buttons) {
+            button.addEventListener("click", getButtonEventFunc(button.value))
+        }
+        //closure 
+        let isCalculated_ = false
+        function getButtonEventFunc(value) {
+            //데이터 디스플레이에 삽입해야 하는 함수
+            return () => { 
+                if (isCalculated_) 
+                {
+                    displayBox.value = ''
+                }
+                isCalculated_ = false
+                displayBox.value += value
+            }
         }
         
-        //closure
-        function typeData(eachNum) {
-            return () => {
-                console.log(eachNum.value)
-            }
-            //데이터 디스플레이에 삽입해야 하는 함수
+        // 계산하기
+        calculationBtns.addEventListener("click", calculate)
+        function calculate() {
+            isCalculated_ = true
+            displayBox.value = eval(displayBox.value)
         }
         //함수의 return값이 funciton => closure || return 값이 value => function
     </script>
